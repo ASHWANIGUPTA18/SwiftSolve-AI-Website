@@ -38,15 +38,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Allow requests from the React dev server and production domain
+# Allow requests from dev server and all Vercel/production domains
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS",
-    "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    "http://localhost:5176,http://localhost:3000,http://127.0.0.1:5176"
 ).split(",")
+
+# Always include Vercel wildcard domains
+ALLOWED_ORIGIN_REGEX = r"https://.*\.vercel\.app"
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=ALLOWED_ORIGIN_REGEX,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
