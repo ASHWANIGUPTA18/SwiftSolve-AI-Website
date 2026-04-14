@@ -1,0 +1,33 @@
+# Environment variables — NEVER commit these
+backend/.env
+.env
+.env.local
+.env.*.local
+
+# Python virtual environment
+backend/swiftsolve/
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Leads data (may contain personal info)
+backend/leads.json
+
+# Node
+animated-landing-page/node_modules/
+node_modules/
+
+# Build output
+animated-landing-page/dist/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
