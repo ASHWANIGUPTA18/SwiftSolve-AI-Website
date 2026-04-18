@@ -140,6 +140,27 @@ body {
       .connect-wallet-btn span {
         @apply relative z-10;
       }
+
+      .nav-right {
+        @apply flex items-center gap-3;
+      }
+
+      .hamburger-btn {
+        @apply flex flex-col justify-center gap-[5px] w-9 h-9 bg-transparent border-none cursor-pointer md:hidden p-1;
+      }
+
+      .ham-bar {
+        @apply block w-full h-[2px] bg-white rounded-full transition-all duration-300 ease-in-out;
+      }
+    }
+  }
+
+  .mobile-menu {
+    @apply fixed top-[7vh] left-0 w-screen bg-black/95 backdrop-blur flex flex-col py-6 px-8 gap-5 z-40 md:hidden;
+    border-top: 1px solid rgba(255,255,255,0.08);
+
+    a {
+      @apply text-white text-lg font-semibold opacity-80 hover:opacity-100 transition-opacity duration-200 py-1;
     }
   }
 
