@@ -44,8 +44,8 @@ ALLOWED_ORIGINS = os.getenv(
     "http://localhost:5176,http://localhost:3000,http://127.0.0.1:5176"
 ).split(",")
 
-# Always include Vercel wildcard domains
-ALLOWED_ORIGIN_REGEX = r"https://.*\.vercel\.app"
+# Allow Vercel preview domains and custom production domain
+ALLOWED_ORIGIN_REGEX = r"https://(.*\.vercel\.app|swiftsolveai\.com|.*\.swiftsolveai\.com)"
 
 app.add_middleware(
     CORSMiddleware,
