@@ -1,6 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+
+const EMAILJS_SERVICE_ID  = 'service_rfhreob';
+const EMAILJS_TEMPLATE_ID = 'template_eomhmfz';
+const EMAILJS_PUBLIC_KEY  = 'Ag4KFfiaR-KmbsF3H';
 
 const Waitlist = () => {
   const [name, setName] = useState('');
@@ -37,9 +42,14 @@ const Waitlist = () => {
 
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        { name, email, message: '' },
+        EMAILJS_PUBLIC_KEY
+      );
+
       if (formRef.current) {
         gsap.to(formRef.current, {
           opacity: 0,
@@ -51,18 +61,18 @@ const Waitlist = () => {
               gsap.fromTo(
                 successRef.current,
                 { opacity: 0, scale: 0.9 },
-                {
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.4,
-                  ease: 'back.out(1.2)',
-                }
+                { opacity: 1, scale: 1, duration: 0.4, ease: 'back.out(1.2)' }
               );
             }
           },
         });
       }
-    }, 1000);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      alert('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
